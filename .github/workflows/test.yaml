@@ -8,6 +8,23 @@ jobs:
   labeler:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: Extract commit messages
+        run: |
+          COMMITS=$(git log --format=%B origin/develop..HEAD)
+          echo "$COMMITS"
+          echo "$COMMITS" > commits.txt
+
+      - name: Debug - Print commits
+        run: cat commits.txt
+
       - name: Set labels based on commit messages
         id: set-labels
         run: |
