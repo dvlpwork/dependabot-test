@@ -29,6 +29,7 @@ jobs:
         id: set-labels
         run: |
           labels=()
+          labels+=("test")
           while IFS= read -r commit; do
             echo "Processing commit: $commit"
             if [[ $commit =~ ^feat ]]; then
